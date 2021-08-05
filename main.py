@@ -40,22 +40,46 @@ class Main:
         for comando in self.comandos:
             comando = comando.strip()
             if comando == "ASC":
+                print("\n")
+                print("-------------------------------")
                 print("Datos ordenados ascendentemente")
+                print("\n")
                 a = self.ordenarAsc(self.copiarLista(self.lista))
                 self.imprimirLista(a)
-                c=3
             elif comando == "DESC":
-                a =2
+                print("\n")
+                print("-------------------------------")
+                print("Datos ordenados descendentemente")
+                print("\n")
+                a = self.ordenarDesc(self.copiarLista(self.lista))
+                self.imprimirLista(a)
             elif comando == "AVG":
-                a = 2
+                print("\n")
+                print("-------------------------------")
+                print("Promedio de la clase")
+                print(self.avg())
             elif comando == "MIN":
-                a = 2
+                print("\n")
+                print("-------------------------------")
+                print("Nota minima de la clase")
+                a = self.min()
+                print(a.nombre + " " + str(a.nota))
             elif comando == "MAX":
-                a = 2
+                print("\n")
+                print("-------------------------------")
+                print("Nota maxima de la clase")
+                a = self.max()
+                print(a.nombre + " " + str(a.nota))
             elif comando == "APR":
-                a = 2
+                print("\n")
+                print("-------------------------------")
+                print("Numero de aprobados")
+                print(self.apr())
             elif comando == "REP":
-                a = 2
+                print("\n")
+                print("-------------------------------")
+                print("Numero de reprobados")
+                print(self.rep())
 
     def imprimirLista(self,lista):
         for elemento in lista:
@@ -66,6 +90,7 @@ class Main:
         for i in lista_original:
             a.append(i)
         return a
+
     #quicksort
     def ordenarAsc(self, lista):
         longitud = len(lista)
@@ -83,13 +108,50 @@ class Main:
 
         return self.ordenarAsc(elementos_menores) + [pivote] + self.ordenarAsc(elementos_mayores)
 
+    # quicksort
+    def ordenarDesc(self, lista):
+        longitud = len(lista)
+        if longitud <= 1:
+            return lista
+        else:
+            pivote = lista.pop()
+        elementos_mayores = []
+        elementos_menores = []
+        for elemento in lista:
+            if elemento.nota < pivote.nota:
+                elementos_mayores.append(elemento)
+            else:
+                elementos_menores.append(elemento)
 
-    #def ordenarDesc(self):
-    #def avg(self):
-  #  def min(self):
-  #  def max(self):
-  #  def apr(self):
-  #  def rep(self):
+        return self.ordenarDesc(elementos_menores) + [pivote] + self.ordenarDesc(elementos_mayores)
+
+    def avg(self):
+        suma = 0
+        n = 0
+        for elemento in self.lista:
+            n += 1
+            suma += elemento.nota
+        return suma/n
+
+    def min(self):
+        return self.ordenarAsc(self.copiarLista(self.lista))[0]
+
+    def max(self):
+        return self.ordenarAsc(self.copiarLista(self.lista))[-1]
+
+    def apr(self):
+        n = 0
+        for elemento in self.lista:
+            if elemento.nota > 61:
+                n += 1
+        return str(n)
+
+    def rep(self):
+        n = 0
+        for elemento in self.lista:
+            if elemento.nota < 61:
+                n += 1
+        return str(n)
 
     def exportarReporte(self):
         c =1
