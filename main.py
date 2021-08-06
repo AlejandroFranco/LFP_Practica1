@@ -20,8 +20,8 @@ class Main:
         print("2 Mostrar reporte en consola")
         print("3 Exportar reporte")
         print("4 salir" + "\n")
-        entrada = input("Ingrese un numero 1-6" + "\n")
-        patron = "[1-6]{1}"
+        entrada = input("Ingrese un numero 1-4" + "\n")
+        patron = "[1-4]{1}"
         if re.search(patron, entrada):
             if entrada == "1":
                 self.cargarArchivo()
@@ -167,8 +167,13 @@ class Main:
             nuevo_contenido = nuevo_contenido[:indice2]+cadena[1]+nuevo_contenido[indice2:]
             pagina_resultado.write(nuevo_contenido)
         else:
-            nuevo_contenido += modelo[0:indice] + cadena[-1] + modelo[indice:len(modelo)]
-            pagina_resultado.write(nuevo_contenido)
+            if (cadena[-1].find("ASC") or cadena[-1].find("DESC"))>-1:
+                nuevo_contenido += modelo[0:indice] + cadena[-1] + modelo[indice:len(modelo)]
+                pagina_resultado.write(nuevo_contenido)
+            else:
+                indice2 = modelo.rindex("</table>")
+                nuevo_contenido = modelo[:indice2]+cadena[-1]+modelo[indice2:]
+                pagina_resultado.write(nuevo_contenido)
         webbrowser.open_new_tab("resultado.html")
 
     def cadenaReporte(self):
