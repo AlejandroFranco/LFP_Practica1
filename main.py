@@ -181,33 +181,27 @@ class Main:
                 for elemento in a:
                     cadena_temp += "<tr>"+"<td>"+elemento.nombre+"</td>"+"<td>"+str(elemento.nota)+"</td>" + "</tr>"
                 cadena.insert(0, cadena_temp)
+                cadena_temp = ""
             elif comando == "DESC":
                 a = self.ordenarDesc(self.copiarLista(self.lista))
                 for elemento in a:
                     cadena_temp += "<tr>"+"<td>"+elemento.nombre+"</td>"+"<td>"+str(elemento.nota)+"</td>" + "</tr>"
                     cadena.insert(0, cadena_temp)
+                    cadena_temp=""
             elif comando == "AVG":
-                cadena_temp = ""
                 cadena_temp += "<tr>"+"<td>"+"AVG"+"</td>" + "<td>" + str(self.avg()) + "</td>"+"</tr>"
-                cadena.insert(1, cadena_temp)
             elif comando == "MIN":
-                cadena_temp = ""
                 min = self.min()
                 cadena_temp += "<tr>" + "<td>" + "MIN" + "</td>" + "<td>" + min.nombre + "</td>"+"<td>"+str(min.nota)+"</td>"+ "</tr>"
-                cadena.insert(1, cadena_temp)
             elif comando == "MAX":
-                cadena_temp = ""
                 max = self.max()
-                cadena_temp += "<tr>" + "<td>" + "MAX" + "</td>" + "<td>" + max.nombre+ "</td>" +"<td>"+str(max.nota)+"</td>"+ "</tr>"
-                cadena.insert(1, cadena_temp)
+                cadena_temp += "<tr>" + "<td>" + "MAX" + "</td>" + "<td>" + max.nombre + "</td>" +"<td>"+str(max.nota)+"</td>"+ "</tr>"
             elif comando == "APR":
-                cadena_temp = ""
                 cadena_temp += "<tr>" + "<td>" + "APR" + "</td>" + "<td>" + str(self.apr()) + "</td>" + "</tr>"
-                cadena.insert(1, cadena_temp)
             elif comando == "REP":
                 cadena_temp = ""
                 cadena_temp += "<tr>" + "<td>" + "REP" + "</td>" + "<td>" + str(self.rep()) + "</td>" + "</tr>"
-                cadena.insert(1, cadena_temp)
+        cadena.insert(1, cadena_temp)
         return cadena
 
     def organizarDatos(self, contenido):
